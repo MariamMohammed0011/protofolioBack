@@ -44,7 +44,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
-            $table->unique(['project_id', 'user_id']); // Prevent duplicate entries
+            $table->primary(['project_id', 'user_id']); // Prevent duplicate entries
         });
     }
 
@@ -58,5 +58,6 @@ return new class extends Migration
         Schema::dropIfExists('categories');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('project_user');
     }
 };
