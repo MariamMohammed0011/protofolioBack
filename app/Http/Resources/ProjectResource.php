@@ -17,7 +17,7 @@ class ProjectResource extends JsonResource
         return [
             'id' => $this->id,
             'projectTitle' => $this->project_title,
-            'imgPath' => asset('storage/images/' . $this->img_path), // Correct path
+            'imgPath' => asset($this->img_path), 
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
         ];
     }
