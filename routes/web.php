@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\CloudinaryImageController;
-
-Route::get('/upload-all-images', [CloudinaryImageController::class, 'uploadAllImages']);
+Route::get('/upload-public-images', [CloudinaryImageController::class, 'uploadAllImagesFromPublic']);
 
 Route::get('/', function () {
     return view('welcome');
