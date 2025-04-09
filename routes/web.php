@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\CloudinaryImageController;
+
+Route::get('/upload-all-images', [CloudinaryImageController::class, 'uploadAllImages']);
 
 Route::get('/', function () {
     return view('welcome');

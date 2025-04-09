@@ -72,5 +72,11 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+'cloudinary' => [
+    'driver' => 'cloudinary',
+    'cloud_name' => env('dt5xb5zys'),
+    'api_key' => env('116577164673939'),
+    'api_secret' => env('ftn_nXuKIRWm4TDxKqI3BxEyVjE'),
+],
 
 ];
