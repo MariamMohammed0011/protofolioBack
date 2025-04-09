@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Illuminate\Support\Facades\Storage;
 class ProjectResource extends JsonResource
 {
     /**
@@ -17,7 +17,7 @@ class ProjectResource extends JsonResource
         return [
             'id' => $this->id,
             'projectTitle' => $this->project_title,
-            'imgPath' => $this->img_path, // Correct path
+            'imgPath' => Storage::url($this->img_path),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
         ];
     }
