@@ -55,7 +55,10 @@
       "postinstall": [
         "php artisan migrate --force",
         "php artisan db:seed --force"
-      ]
+      ],
+      "post-install-cmd": [
+    "@php artisan storage:link"
+  ]
   
 }
   ,
