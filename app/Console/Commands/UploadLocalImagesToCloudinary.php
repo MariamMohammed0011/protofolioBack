@@ -19,9 +19,9 @@ class UploadLocalImagesToCloudinary extends Command
         foreach ($files as $file) {
             $filename = $file->getFilename();
             $nameWithoutExt = pathinfo($filename, PATHINFO_FILENAME);
+            $relativePath = 'images/' . $filename;
 
-            $project = Project::where('img_path', 'like', "%$filename")->first();
-
+            $project = Project::where('img_path', $relativePath)->first();
             if ($project) {
                 $url = Cloudinary::upload($file->getRealPath(), [
                     'folder' => 'projects_images',
