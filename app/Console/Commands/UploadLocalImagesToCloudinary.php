@@ -3,7 +3,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use App\Models\Project; // غيرها حسب موديلك
+use App\Models\User; // غيرها حسب موديلك
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class UploadLocalImagesToCloudinary extends Command
@@ -13,25 +13,25 @@ class UploadLocalImagesToCloudinary extends Command
 
     public function handle()
     {
-        $folderPath = public_path('images'); // مكان الصور على جهازك
+        $folderPath = public_path('members'); // مكان الصور على جهازك
         $files = File::files($folderPath);
 
         foreach ($files as $file) {
             $filename = $file->getFilename();
             $nameWithoutExt = pathinfo($filename, PATHINFO_FILENAME);
-            $relativePath = 'images/' . $filename;
+            $relativePath = 'members/' . $filename;
 
-            $project = Project::where('img_path', $relativePath)->first();
-            if ($project) {
+            $user = User::where('profile_picture', $relativePath)->first();
+            if ($user) {
                 $url = Cloudinary::upload($file->getRealPath(), [
-                    'folder' => 'projects_images',
+                    'folder' => 'users_images',
                     'public_id' => $nameWithoutExt
                 ])->getSecurePath();
 
-                $project->img_path = $url;
-                $project->save();
+                $user->profile_picture = $url;
+                $user->save();
 
-                $this->info("✅ رفعت الصورة وحدثت المشروع: {$project->title}");
+                $this->info("✅ رفعت الصورة وحدثت المشروع: {$user->name}");
             } else {
                 $this->warn("❌ ما لقيت مشروع للصورة: $filename");
             }
